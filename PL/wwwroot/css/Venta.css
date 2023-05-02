@@ -24,7 +24,7 @@ h2 {
 
 .card-image {
     position:relative;
-    width: 10px;
+    width: 1px;
 }
 
     .card-image > img {
@@ -39,7 +39,7 @@ h2 {
 }
 
 #spiderman > .card-image {
-    height: 120%;
+    height: 50%;
     width: 95%;
     background-color: #FFFF;
 }
@@ -47,15 +47,15 @@ h2 {
     #spiderman > .card-image > img {
         width: 120%;
         height: 95%;
-        margin-top: 5px;
+        margin-top: 25px;
         margin-left: -30px;
     }
 
 #spiderman h2 {
-    font-size: 2rem;
-    letter-spacing: 15px;
+    font-size: 1.8rem;
+    letter-spacing: 8.5px;
     text-align: center;
-    margin-left: 10px;
+    margin-left: 5px;
     color: #2E5579;
 
 }
@@ -63,7 +63,7 @@ h2 {
 #spiderman > .card-text > div {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
     padding-top:5px;
 
 

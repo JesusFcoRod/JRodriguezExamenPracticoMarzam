@@ -1,7 +1,7 @@
 ﻿@model ML.Persona
 @{
     ViewData["Title"] = "LoginPersona";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
 <head>
@@ -30,28 +30,14 @@
                     <div class="form-container">
                         @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @id = "txtUserName", @placeholder= "Username" })
                         @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword", @placeholder= "Password" })
-                        <button class="btn-login">Registrar</button>                      
+                        <button class="btn-login">Ingresar</button>                      
                     </div>
                 </div>
             </div>
         </main>
         <footer>
             <div class="footer-contents">
-                <ol>
-                    <li>English (UK)</li>
-                    <li><a href="#">മലയാളം</a></li>
-                    <li><a href="#">தமிழ்</a></li>
-                    <li><a href="#">తెలుగు</a></li>
-                    <li><a href="#">বাংলা</a></li>
-                    <li><a href="#">اردو</a></li>
-                    <li><a href="#">हिन्दी</a></li>
-                    <li><a href="#">ಕನ್ನಡ</a></li>
-                    <li><a href="#">Español</a></li>
-                    <li><a href="#">Português (Brasil)</a></li>
-                    <li><a href="#">Français (France)</a></li>
-                    <li><button>+</button></li>
-                </ol>
-                <small>Marzam © 2022</small>
+                <small>Marzam © 2023</small>
             </div>
         </footer>
     </body>

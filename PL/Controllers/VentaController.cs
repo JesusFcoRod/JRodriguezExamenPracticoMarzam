@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DL;
+using Microsoft.AspNetCore.Mvc;
+using ML;
 
 namespace PL.Controllers
 {
@@ -17,7 +19,6 @@ namespace PL.Controllers
             return View(medicamento);
         }
         //COMPRAS
-
         public ActionResult Carrito()
         {
             return View();
@@ -95,6 +96,7 @@ namespace PL.Controllers
         public ActionResult ResumenCompra(ML.VentaMedicamento ventaMedicamento)
         {
             decimal TotalPagar = 0;
+
             if (HttpContext.Session.GetString("Medicamento") == null)
             {
                 return View();
@@ -103,6 +105,8 @@ namespace PL.Controllers
             {
                 ventaMedicamento.Ventas = new List<object>();
                 GetCarrito(ventaMedicamento);
+
+                TotalPagar = GetTotalPagar(ventaMedicamento);
                 ventaMedicamento.Total = TotalPagar;
             }
             return View(ventaMedicamento);
@@ -118,6 +122,108 @@ namespace PL.Controllers
                 ventaMedicamento.Ventas.Add(objMedicamento);
             }
             return ventaMedicamento;
+        }
+
+        public decimal GetTotalPagar(ML.VentaMedicamento VentaMedicamento)
+        {
+            decimal TotalPagar = 0;
+            decimal[] Totales = new decimal[VentaMedicamento.Ventas.Count()];// Creamos arreglo del tam de la lista de productos
+
+            for (int i = 0; i<Totales.Count(); i++)//recorremos la lista de productos en el carrito
+            {
+                ML.Medicamento medicamento = new ML.Medicamento();
+                medicamento = (ML.Medicamento)VentaMedicamento.Ventas[i];
+                decimal SubT = medicamento.SubTotal;
+                Totales[i] = SubT;//agregamos los subtotales al arreglos
+
+            }
+
+            TotalPagar = Totales.Sum();//sumamos los subtotales del arreglo
+            return TotalPagar;
+        }
+
+        [HttpGet]
+        public ActionResult PagarCarrito()
+        {
+            HttpContext.Session.Clear();
+            return PartialView("CompraFinalizada");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int IdMedicamento)
+        {
+            bool existe = false;
+            ML.VentaMedicamento ventaMedicamento = new ML.VentaMedicamento();
+            ventaMedicamento.Ventas = new List<object>();
+
+            if (HttpContext.Session.GetString("Medicamento") == null)
+            {
+                return View();
+            }
+            GetCarrito(ventaMedicamento);
+            foreach (ML.Medicamento venta in ventaMedicamento.Ventas.ToList())
+            {
+                if (IdMedicamento == venta.IdMedicamento)
+                {
+                    venta.Cantidad = venta.Cantidad - 1;
+                    venta.SubTotal = venta.Precio * venta.Cantidad;
+                    venta.Imagen = venta.Imagen;
+                    existe = true;
+
+                    if (venta.Cantidad == 0)
+                    {
+                        ventaMedicamento.Ventas.Remove(venta);
+                    }
+                }
+                else
+                {
+                    existe = false;
+                }
+
+                if (existe == true)
+                {
+                    break;
+                }
+            }
+            HttpContext.Session.SetString("Medicamento", Newtonsoft.Json.JsonConvert.SerializeObject(ventaMedicamento.Ventas));
+            ViewBag.Message = "Medicamento retirado de su carrito";
+            return PartialView("Modal");
+        }
+
+        [HttpGet]
+
+        public ActionResult Add(int IdMedicamento)
+        {
+            bool existe = false;
+            ML.VentaMedicamento ventaMedicamento = new ML.VentaMedicamento();
+            ventaMedicamento.Ventas = new List<object>();
+
+            if (HttpContext.Session.GetString("Medicamento") == null)
+            {
+                return View();
+            }
+            GetCarrito(ventaMedicamento);
+            foreach (ML.Medicamento venta in ventaMedicamento.Ventas.ToList())
+            {
+                if (IdMedicamento == venta.IdMedicamento)
+                {
+                    venta.Cantidad = venta.Cantidad + 1;
+                    venta.SubTotal = venta.Precio * venta.Cantidad;
+                    venta.Imagen = venta.Imagen;
+                    existe = true;
+                }
+                else
+                {
+                    existe = false;
+                }
+                if (existe == true)
+                {
+                    break;
+                }
+            }
+            HttpContext.Session.SetString("Medicamento", Newtonsoft.Json.JsonConvert.SerializeObject(ventaMedicamento.Ventas));
+            ViewBag.Message = "Medicamento agregado a su carrito";
+            return PartialView("Modal");
         }
 
 

@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 @if (Context.Session.GetString("Medicamento") == null)
 {
     <h2>Tu Carrito esta vacio</h2>
@@ -44,11 +45,13 @@ else
         <thead>
             <tr class="table-secondary">
                 <td style="display :none;">id</td>
-                <td>Imagen</td>
-                <td>Nombre</td>
-                <td>Precio Unitario</td>
-                <td>Subtotal</td>
+                <td style="text-align:center;">Eliminar Medicamento</td>
+                <td style="text-align:center;">Imagen</td>
+                <td style="text-align:center;">Nombre</td>
+                <td style="text-align:center">Precio Unitario</td>
+                <td style="text-align:center;">Subtotal</td>
                 <td style="text-align: center; vertical-align: middle;">Cantidad</td>
+                <td style="text-align:center;">Agregar Medicamento</td>
             </tr>
         </thead>
         <tbody>
@@ -56,7 +59,8 @@ else
             {
                 <tr>
                     <td style="display :none;">@medicamento.IdMedicamento </td>
-                    <td>
+                    <td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger" href="@Url.Action("Delete", "Venta", new { IdMedicamento = medicamento.IdMedicamento})" onclick="return confirm('Estas seguro que deseas eliminar este producto?');"><i class="fa-solid fa-trash" style="color: mintcream"></i></a></td>
+                    <td style="text-align:center;">
                         @if (medicamento.Imagen == null || medicamento.Imagen == "")
                         {
                             <img id="Img" src="~/Imagenes/ProductoND.png" style="width:150px ; height:150px" />
@@ -68,15 +72,16 @@ else
                         }
                     </td>
 
-                    <td>@medicamento.Nombre</td>
-                    <td>@medicamento.Precio</td>
-                    <td>@medicamento.SubTotal</td>
+                    <td style="text-align:center;">@medicamento.Nombre</td>
+                    <td style="text-align:center;">@medicamento.Precio</td>
+                    <td style="text-align:center;">@medicamento.SubTotal</td>
                     <td style="text-align: center; vertical-align: middle;">@medicamento.Cantidad</td>
+                    <td style="text-align: center; vertical-align: middle;"><a class="btn btn-success" href="@Url.Action("Add", "Venta", new { IdMedicamento = medicamento.IdMedicamento})"><i class="fa-solid fa-plus" style="color: mintcream"></i></a></td>
                 </tr>
             }
 
             <tr class="table-light">
-                <td>Total</td>
+                <td style="text-align:center;">Total</td>
                 <td></td>
                 <td></td>
                 <td style="text-align: center; vertical-align: middle;">@Model.Total</td>
@@ -89,12 +94,14 @@ else
     <div class="row">
         <div class="col-md-12">
             <div style="float:right">
-                @Html.ActionLink("Pagar", "MedicamentoGetAll", "Venta", htmlAttributes: new { @class = "btn btn-success" })
+                @Html.ActionLink("Pagar", "PagarCarrito", "Venta", htmlAttributes: new { @class = "btn btn-success" })
             </div>
         </div>
     </div>
 
 
 }
+
+
 
 
