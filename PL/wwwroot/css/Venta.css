@@ -1,0 +1,112 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', serif;
+}
+
+h2 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 3rem;
+}
+
+
+
+.card {
+    margin: 0 30px;
+    height: 500px;
+    width: 260px;
+    background-color: #fff;
+    border: 5px solid black;
+    box-shadow: 0 0 0 7px #fff,0 0 8px 5px #000;
+}
+
+.card-image {
+    position:relative;
+    width: 10px;
+}
+
+    .card-image > img {
+        position: absolute;
+        width: 120%;
+    }
+
+.card-text > div {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#spiderman > .card-image {
+    height: 120%;
+    width: 95%;
+    background-color: #FFFF;
+}
+
+    #spiderman > .card-image > img {
+        width: 120%;
+        height: 95%;
+        margin-top: 5px;
+        margin-left: -30px;
+    }
+
+#spiderman h2 {
+    font-size: 2rem;
+    letter-spacing: 15px;
+    text-align: center;
+    margin-left: 10px;
+    color: #2E5579;
+
+}
+
+#spiderman > .card-text > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-top:5px;
+
+
+}
+
+    #spiderman > .card-text > div > div:first-child {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+        #spiderman > .card-text > div > div:first-child > span {
+            font-size: 0.5rem;
+            line-height: 20px;
+            font-weight: 400;
+
+        }
+
+    #spiderman > .card-text > div > div:last-child {
+        display: flex;
+
+    }
+
+        #spiderman > .card-text > div > div:last-child > span:first-child { /*PRECIO*/
+            font-size: 2.5rem;
+            font-weight: 800;
+            position: center;
+            line-height: 60px;
+
+        }
+
+        #spiderman > .card-text > div > div:last-child > span:last-child {
+            font-weight: 500;
+            font-size: 1.3rem;
+            
+        }
+
+.right {
+    padding-top: 10px;
+    padding-left: 40px;
+    margin-left: 40px;
+    position: center;
+    float: left;
+    width: 20%;
+    height: auto;
+}

@@ -1,0 +1,53 @@
+﻿@model ML.Medicamento
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>MEDICAMENTOS REGISTRADOS</h1>
+<link rel="stylesheet" href="~/css/TablaMedicamentos.css" asp-append-version="true" />
+
+
+<div style="float:right;">
+    @Html.ActionLink("Agregar", "Form", "Medicamento", htmlAttributes: new { @class = "btn btn-success" })
+</div>
+
+<br />
+<br />
+
+<table class="fl-table">
+    <thead>
+        <tr class="table-secondary">
+            <td style="text-align:center">Editar</td>
+            <td style="display :none;">id</td>
+            <td style="text-align:center">Nombre Medicamento</td>
+            <td style="text-align:center">Precio Unitario</td>
+            <td style="text-align:center">Imagen</td>
+            <td style="text-align:center">Eliminar</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (ML.Medicamento medicamento in Model.Medicamentos)
+        {
+            <tr>
+                <td style="text-align: center; vertical-align: middle;"><a class="btn btn-warning glyphicon  glyphicon glyphicon-cog" href="@Url.Action("Form", "Medicamento", new { IdMedicamento = medicamento.IdMedicamento})"><i class="bi bi-pencil-square" style="color: ivory"></i></a></td>
+                <td style="display :none;">@medicamento.IdMedicamento </td>
+                <td style="text-align:center">@medicamento.Nombre</td>
+                <td style="text-align:center">@medicamento.Precio</td>
+                <td style="text-align:center">
+                    @if (medicamento.Imagen == null || medicamento.Imagen == "")
+                    {
+                        <img id="Img" src="~/Imagenes/MedND.jpg" style="width:150px ; height:150px" />
+                    }
+                    else
+                    {
+                        <img id="Img" src="data:image/*;base64,@medicamento.Imagen" style="width:150px ; height:150px" />
+                    }
+                </td>
+                <td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Medicamento", new { IdMedicamento = medicamento.IdMedicamento})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i></a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

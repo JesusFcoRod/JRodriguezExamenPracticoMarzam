@@ -1,0 +1,100 @@
+﻿@model ML.VentaMedicamento
+@{
+    ViewData["Title"] = "ResumenCompra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Context.Session.GetString("Medicamento") == null)
+{
+    <h2>Tu Carrito esta vacio</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Vuelve al catalogo para agregar medicamentos a tu carrito</h5>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div style="float:right">
+                    @Html.ActionLink("Volver al catálogo", "MedicamentoGetAll", "Venta", htmlAttributes: new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h2>Resumen de compra</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Revise el resumen de su compra.</h5>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <div style="float:right">
+                @Html.ActionLink("Volver al catálogo", "MedicamentoGetAll", "Venta", htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <table class="table table-hover table-striped table-bordered table-responsive">
+        <thead>
+            <tr class="table-secondary">
+                <td style="display :none;">id</td>
+                <td>Imagen</td>
+                <td>Nombre</td>
+                <td>Precio Unitario</td>
+                <td>Subtotal</td>
+                <td style="text-align: center; vertical-align: middle;">Cantidad</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ML.Medicamento medicamento in Model.Ventas)
+            {
+                <tr>
+                    <td style="display :none;">@medicamento.IdMedicamento </td>
+                    <td>
+                        @if (medicamento.Imagen == null || medicamento.Imagen == "")
+                        {
+                            <img id="Img" src="~/Imagenes/ProductoND.png" style="width:150px ; height:150px" />
+
+                        }
+                        else
+                        {
+                            <img id="Img" src="data:image/*;base64,@medicamento.Imagen" style="width:150px ; height:150px" />
+                        }
+                    </td>
+
+                    <td>@medicamento.Nombre</td>
+                    <td>@medicamento.Precio</td>
+                    <td>@medicamento.SubTotal</td>
+                    <td style="text-align: center; vertical-align: middle;">@medicamento.Cantidad</td>
+                </tr>
+            }
+
+            <tr class="table-light">
+                <td>Total</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: center; vertical-align: middle;">@Model.Total</td>
+                <td style="text-align: center; vertical-align: middle;">Pesos</td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <div style="float:right">
+                @Html.ActionLink("Pagar", "MedicamentoGetAll", "Venta", htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+
+
+}
+
+
