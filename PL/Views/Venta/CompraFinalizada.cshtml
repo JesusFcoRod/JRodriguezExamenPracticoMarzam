@@ -26,15 +26,45 @@
                         <label class="DE">Direccion de entrega:</label>
                         <input type="text" class="form-control" id="txtDireccion" placeholder="Direccion" />
                     </div>
-                    <div class="form-group">
-                        <label class="NT">Numero de Tarjeta</label>
-                        <input type="text" class="form-control" id="txtNumTarjeta" placeholder="Tarjeta de Credito/Debito" />
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <div class="col-md-6">
+                                <label class="NT">Numero de Tarjeta</label>
+                                <input type="text" class="form-control" id="txtNumTarjeta" placeholder="Tarjeta de Credito/Debito" />
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="NT">MM:</label>
+                                    <input type="text" class="form-control" id="txtMM" placeholder="MM" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="NT">YY:</label>
+                                    <input type="text" class="form-control" id="txtYY" placeholder="YY" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label class="NT">CVC</label>
+                                    <input type="text" class="form-control" id="txtCVC" placeholder="CVC" />
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <div style="text-align:center;">
-                    @Html.ActionLink("Catalogo", "MedicamentoGetAll", "Venta", htmlAttributes: new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Carrito", "ResumenCompra", "Venta", htmlAttributes: new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Pagar", "FormularioPago", "Venta", htmlAttributes: new { @class = "btn btn-danger" })
                 </div>
             </div>
         </div>

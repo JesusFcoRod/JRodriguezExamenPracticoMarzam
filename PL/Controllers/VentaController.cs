@@ -144,9 +144,15 @@ namespace PL.Controllers
 
         [HttpGet]
         public ActionResult PagarCarrito()
+        {           
+            return PartialView("CompraFinalizada");
+        }
+
+        [HttpGet]
+        public ActionResult FormularioPago()
         {
             HttpContext.Session.Clear();
-            return PartialView("CompraFinalizada");
+            return PartialView("FormularioPago");
         }
 
         [HttpGet]
